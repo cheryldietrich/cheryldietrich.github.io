@@ -21,7 +21,7 @@ jobs:
       - name: Checkout Source (Mywebsite)
         uses: actions/checkout@v4
         with:
-          repository: username/Mywebsite
+          repository: cheryldietrich/Mywebsite
           ref: main
           path: Mywebsite
           ssh-key: ${{ secrets.MYWEBSITE_SSH_KEY }}
