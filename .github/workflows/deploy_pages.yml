@@ -35,11 +35,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libarchive-dev
-      
-      - name: Debug renv.lock location
-        run: |
-          ls -la Mywebsite
-          find Mywebsite -maxdepth 2 -name 'renv.lock' -print
           
       - name: Restore R Packages via renv 📦
         uses: r-lib/actions/setup-renv@v2
@@ -53,7 +48,7 @@ jobs:
           lib <- Sys.getenv("R_LIBS_USER")
           if (lib == "") lib <- .libPaths()[1]
           .libPaths(unique(c(lib, .libPaths())))
-          install.packages("shinylive", repos="https://r-project.org", lib=lib)
+          install.packages("shinylive", lib=lib)
           '
 
       - name: Install Quarto (Includes Pandoc)
