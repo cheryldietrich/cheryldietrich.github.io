@@ -1,0 +1,77 @@
+name: Pages Build & Deploy (from Mywebsite)
+
+on:
+  repository_dispatch:
+    types: [quarto-pages-deploy]
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source (Mywebsite)
+        uses: actions/checkout@v4
+        with:
+          repository: username/Mywebsite
+          ref: main
+          path: Mywebsite
+          ssh-key: ${{ secrets.MYWEBSITE_SSH_KEY }}
+          # set to false if this is a public checkout and you don't need strict host checks
+          persist-credentials: false
+
+      - name: Set up R Environment
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install System Dependencies for R
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libarchive-dev
+
+      - name: Restore R Packages via renv 📦
+        uses: r-lib/actions/setup-renv@v2
+
+      - name: Install shinylive for Quarto (not always captured in renv.lock)
+        working-directory: Mywebsite
+        run: |
+          Rscript -e '
+          lib <- Sys.getenv("R_LIBS_USER")
+          if (lib == "") lib <- .libPaths()[1]
+          .libPaths(unique(c(lib, .libPaths())))
+          install.packages("shinylive", repos="https://cloud.r-project.org", lib=lib)
+          '
+
+      - name: Install Quarto (Includes Pandoc)
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: "1.9.38"
+
+      - name: Render Quarto Site
+        working-directory: Mywebsite
+        run: quarto render
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: Mywebsite/_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
