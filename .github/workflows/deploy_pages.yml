@@ -1,4 +1,4 @@
-name: Pages Build & Deploy (from Mywebsite)
+name: Pages Deploy (build from Mywebsite repo)
 
 on:
   repository_dispatch:
@@ -16,16 +16,14 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Source (Mywebsite)
+      - name: Checkout Private Source (Mywebsite)
         uses: actions/checkout@v4
         with:
           repository: cheryldietrich/Mywebsite
           ref: main
           path: Mywebsite
           ssh-key: ${{ secrets.MYWEBSITE_SSH_KEY }}
-          # set to false if this is a public checkout and you don't need strict host checks
           persist-credentials: false
 
       - name: Set up R Environment
@@ -41,14 +39,14 @@ jobs:
       - name: Restore R Packages via renv 📦
         uses: r-lib/actions/setup-renv@v2
 
-      - name: Install shinylive for Quarto (not always captured in renv.lock)
+      - name: Install shinylive for Quarto
         working-directory: Mywebsite
         run: |
           Rscript -e '
           lib <- Sys.getenv("R_LIBS_USER")
           if (lib == "") lib <- .libPaths()[1]
           .libPaths(unique(c(lib, .libPaths())))
-          install.packages("shinylive", repos="https://cloud.r-project.org", lib=lib)
+          install.packages("shinylive", repos="https://r-project.org", lib=lib)
           '
 
       - name: Install Quarto (Includes Pandoc)
