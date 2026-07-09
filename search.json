@@ -1,0 +1,170 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Cheryl Dietrich",
+    "section": "",
+    "text": "Data Scientist | Global Health Expert | ML Enthusiast\nI spent 10+ years managing complex data systems and population-based surveys in the public health sector. Today, I apply that same rigor to data science—utilizing R, Python, and SQL to extract meaning from large datasets. Whether it’s a global pandemic response or private-sector analytics, I specialize in turning complex information into clear strategy.\nWhen I’m not analyzing data, you can find me stand-up paddle boarding or watching the World Cup."
+  },
+  {
+    "objectID": "blog/2026-07-07_firstpost/post.html",
+    "href": "blog/2026-07-07_firstpost/post.html",
+    "title": "Trying a Local LLM",
+    "section": "",
+    "text": "Maybe it’s the old ad campaign, ‘what happens in Vegas, stays in Vegas’, but more and more I want to use a model without becoming part of the next training dataset. Beyond this concern for privacy, I believe the AI ‘arms race’ will eventually slow down. And once there are few competitors left, both individuals and organizations will be asked to pay the true compute cost. Small- and medium-sized firms may look to hybrid strategies: using both local and cloud services for storage, operations, and LLMs (large-language models). Thus, I’m exploring my first local LLM."
+  },
+  {
+    "objectID": "blog/2026-07-07_firstpost/post.html#motivation",
+    "href": "blog/2026-07-07_firstpost/post.html#motivation",
+    "title": "Trying a Local LLM",
+    "section": "",
+    "text": "Maybe it’s the old ad campaign, ‘what happens in Vegas, stays in Vegas’, but more and more I want to use a model without becoming part of the next training dataset. Beyond this concern for privacy, I believe the AI ‘arms race’ will eventually slow down. And once there are few competitors left, both individuals and organizations will be asked to pay the true compute cost. Small- and medium-sized firms may look to hybrid strategies: using both local and cloud services for storage, operations, and LLMs (large-language models). Thus, I’m exploring my first local LLM."
+  },
+  {
+    "objectID": "blog/2026-07-07_firstpost/post.html#resources",
+    "href": "blog/2026-07-07_firstpost/post.html#resources",
+    "title": "Trying a Local LLM",
+    "section": "Resources",
+    "text": "Resources\nI am not a computer scientist… just comfortable enough to be dangerous in the Terminal1. I have a newer Mac laptop and 32GB of RAM."
+  },
+  {
+    "objectID": "blog/2026-07-07_firstpost/post.html#setup",
+    "href": "blog/2026-07-07_firstpost/post.html#setup",
+    "title": "Trying a Local LLM",
+    "section": "Setup",
+    "text": "Setup\nFor a basic out-of-the-box chat, I downloaded ollama. Ultimately, I chose gemma4:12b-mlx. It seemed to be a newer model2 which my system could handle AND can be used with visual and audio inputs, not just text.\nDownloads and runs\nollama pull 'modelname/version'\nRuns only\nollama run 'modelname/version'\nFor those who aren’t familiar, ollama helps handle:\n\ndependencies - other software that your software DEPENDS on to run\nmodel downloads - different models have different parameterization options, some can be run via cloud, some locally, etc.\nserver processes - making it all work through calculations and managing computer hardware usage"
+  },
+  {
+    "objectID": "blog/2026-07-07_firstpost/post.html#lessons-learned",
+    "href": "blog/2026-07-07_firstpost/post.html#lessons-learned",
+    "title": "Trying a Local LLM",
+    "section": "Lessons Learned",
+    "text": "Lessons Learned\n\nLeverage the machine’s strengths\nThe first lesson I learned was to not trust AI to choose your LLM model - or at least put more thought into it. I first downloaded gemma4-12b:q8_0. I wanted power, I wanted precision, I wanted to vibe code well… AND based only on available RAM and disk space it theoretically could’ve worked. But it was SLOW 🐢. Each letter of thinking and response was meticulously ‘typed out’ on the terminal screen. So I removed that model and downloaded the MLX version designed to work with Mac’s unified memory. I don’t know if it was this better memory management or the default 4-bit quantization3 but the model’s file size was halved and speed of response was bearable! 🐯\n\n\nTo ‘Think’ or not to ‘Think’?\nOn text, Gemma4 comes with a ‘thinking’ default. An internal monologue inside of a ‘thought channel’ helps to identify tools or revise initial predictions before executing those tools or formulating a response. It’s designed to improved response accuracy over standard next-token prediction; however, it does slow down the process due to both the additional processing tasks and the extra terminal output.\nOn CLI (command line interface) setting –think=false will suppress this for the entire session.\nollama run 'modelname/version' --think=false\nor to toggle off within the session, \\set nothink.\n\n\nMake it stop\nStop the process in Terminal if it’s ‘thinking’ or responding too much or hanging by using Ctrl + C. Once you’re done chatting and if the model is still running, to exit out of the model/ollama, tell it /bye."
+  },
+  {
+    "objectID": "blog/2026-07-07_firstpost/post.html#immediate-impressions",
+    "href": "blog/2026-07-07_firstpost/post.html#immediate-impressions",
+    "title": "Trying a Local LLM",
+    "section": "Immediate Impressions",
+    "text": "Immediate Impressions\nThis specific model on my hardware is heavily impacted by the ‘think’ setting. Total duration is noticeably 4x faster with –think=false. For example, ~10 seconds vs. ~40 seconds for the prompt, ‘how big is the oldest Douglas Fir tree?’. I used option --verbose on ollama CLI to compare rates and time. Do note that repeat previous prompting can drastically affect prompt evaluation metrics; a repeat prompt with –think=false avoids recalculation of (attention) weights by pulling these values from the cache. Interestingly, trying to test cache use with toggling `/set think’ within the same chat session caused Gemma4’s ‘thought channel’ to add the context that I had asked the same question three times and actually increased tokens used and duration metrics!\nOverall, Gemma4:12b-mlx is user-friendly as a local LLM. However, a reminder that LLMs are ‘frozen in time’ to their training unless using RAG (Retrieval-Augmented Generation) or fine-tuning them. Gemma4’s training ends January 2025. Not pulling from the internet is a pro for privacy and security but a con for up-to-date information."
+  },
+  {
+    "objectID": "blog/2026-07-07_firstpost/post.html#future-exploration",
+    "href": "blog/2026-07-07_firstpost/post.html#future-exploration",
+    "title": "Trying a Local LLM",
+    "section": "Future Exploration",
+    "text": "Future Exploration\nMy next step is to use CLI or Open WebUI to explore the model’s functionality for visual information. I will also continue to explore its coding performance on debugging issues or writing short code for small personal tasks."
+  },
+  {
+    "objectID": "blog/2026-07-07_firstpost/post.html#footnotes",
+    "href": "blog/2026-07-07_firstpost/post.html#footnotes",
+    "title": "Trying a Local LLM",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nFor example, I once copy-pasted code from Google AI and it injected an extra, unintended, space into my Terminal upstream of my intended path and removed my whole user folder, losing all of this website’s initial mock-ups and files. I was savvy enough to only be so cavalier on a Virtual Machine but not savvy enough to have fully set up a repository or copy!↩︎\nAs of June, 2026↩︎\nReduces model weights to fewer values. Tradeoff between accuracy and speed/memory usage↩︎"
+  },
+  {
+    "objectID": "latest_post_placeholder.html",
+    "href": "latest_post_placeholder.html",
+    "title": "Trying a Local LLM",
+    "section": "",
+    "text": "Maybe it’s the old ad campaign, ‘what happens in Vegas, stays in Vegas’, but more and more I want to use a model without becoming part of the next training dataset. Beyond this concern for privacy, I believe the AI ‘arms race’ will eventually slow down. And once there are few competitors left, both individuals and organizations will be asked to pay the true compute cost. Small- and medium-sized firms may look to hybrid strategies: using both local and cloud services for storage, operations, and LLMs (large-language models). Thus, I’m exploring my first local LLM."
+  },
+  {
+    "objectID": "latest_post_placeholder.html#motivation",
+    "href": "latest_post_placeholder.html#motivation",
+    "title": "Trying a Local LLM",
+    "section": "",
+    "text": "Maybe it’s the old ad campaign, ‘what happens in Vegas, stays in Vegas’, but more and more I want to use a model without becoming part of the next training dataset. Beyond this concern for privacy, I believe the AI ‘arms race’ will eventually slow down. And once there are few competitors left, both individuals and organizations will be asked to pay the true compute cost. Small- and medium-sized firms may look to hybrid strategies: using both local and cloud services for storage, operations, and LLMs (large-language models). Thus, I’m exploring my first local LLM."
+  },
+  {
+    "objectID": "latest_post_placeholder.html#resources",
+    "href": "latest_post_placeholder.html#resources",
+    "title": "Trying a Local LLM",
+    "section": "Resources",
+    "text": "Resources\nI am not a computer scientist… just comfortable enough to be dangerous in the Terminal1. I have a newer Mac laptop and 32GB of RAM."
+  },
+  {
+    "objectID": "latest_post_placeholder.html#setup",
+    "href": "latest_post_placeholder.html#setup",
+    "title": "Trying a Local LLM",
+    "section": "Setup",
+    "text": "Setup\nFor a basic out-of-the-box chat, I downloaded ollama. Ultimately, I chose gemma4:12b-mlx. It seemed to be a newer model2 which my system could handle AND can be used with visual and audio inputs, not just text.\nDownloads and runs\nollama pull 'modelname/version'\nRuns only\nollama run 'modelname/version'\nFor those who aren’t familiar, ollama helps handle:\n\ndependencies - other software that your software DEPENDS on to run\nmodel downloads - different models have different parameterization options, some can be run via cloud, some locally, etc.\nserver processes - making it all work through calculations and managing computer hardware usage"
+  },
+  {
+    "objectID": "latest_post_placeholder.html#lessons-learned",
+    "href": "latest_post_placeholder.html#lessons-learned",
+    "title": "Trying a Local LLM",
+    "section": "Lessons Learned",
+    "text": "Lessons Learned\n\nLeverage the machine’s strengths\nThe first lesson I learned was to not trust AI to choose your LLM model - or at least put more thought into it. I first downloaded gemma4-12b:q8_0. I wanted power, I wanted precision, I wanted to vibe code well… AND based only on available RAM and disk space it theoretically could’ve worked. But it was SLOW 🐢. Each letter of thinking and response was meticulously ‘typed out’ on the terminal screen. So I removed that model and downloaded the MLX version designed to work with Mac’s unified memory. I don’t know if it was this better memory management or the default 4-bit quantization3 but the model’s file size was halved and speed of response was bearable! 🐯\n\n\nTo ‘Think’ or not to ‘Think’?\nOn text, Gemma4 comes with a ‘thinking’ default. An internal monologue inside of a ‘thought channel’ helps to identify tools or revise initial predictions before executing those tools or formulating a response. It’s designed to improved response accuracy over standard next-token prediction; however, it does slow down the process due to both the additional processing tasks and the extra terminal output.\nOn CLI (command line interface) setting –think=false will suppress this for the entire session.\nollama run 'modelname/version' --think=false\nor to toggle off within the session, \\set nothink.\n\n\nMake it stop\nStop the process in Terminal if it’s ‘thinking’ or responding too much or hanging by using Ctrl + C. Once you’re done chatting and if the model is still running, to exit out of the model/ollama, tell it /bye."
+  },
+  {
+    "objectID": "latest_post_placeholder.html#immediate-impressions",
+    "href": "latest_post_placeholder.html#immediate-impressions",
+    "title": "Trying a Local LLM",
+    "section": "Immediate Impressions",
+    "text": "Immediate Impressions\nThis specific model on my hardware is heavily impacted by the ‘think’ setting. Total duration is noticeably 4x faster with –think=false. For example, ~10 seconds vs. ~40 seconds for the prompt, ‘how big is the oldest Douglas Fir tree?’. I used option --verbose on ollama CLI to compare rates and time. Do note that repeat previous prompting can drastically affect prompt evaluation metrics; a repeat prompt with –think=false avoids recalculation of (attention) weights by pulling these values from the cache. Interestingly, trying to test cache use with toggling `/set think’ within the same chat session caused Gemma4’s ‘thought channel’ to add the context that I had asked the same question three times and actually increased tokens used and duration metrics!\nOverall, Gemma4:12b-mlx is user-friendly as a local LLM. However, a reminder that LLMs are ‘frozen in time’ to their training unless using RAG (Retrieval-Augmented Generation) or fine-tuning them. Gemma4’s training ends January 2025. Not pulling from the internet is a pro for privacy and security but a con for up-to-date information."
+  },
+  {
+    "objectID": "latest_post_placeholder.html#future-exploration",
+    "href": "latest_post_placeholder.html#future-exploration",
+    "title": "Trying a Local LLM",
+    "section": "Future Exploration",
+    "text": "Future Exploration\nMy next step is to use CLI or Open WebUI to explore the model’s functionality for visual information. I will also continue to explore its coding performance on debugging issues or writing short code for small personal tasks."
+  },
+  {
+    "objectID": "latest_post_placeholder.html#footnotes",
+    "href": "latest_post_placeholder.html#footnotes",
+    "title": "Trying a Local LLM",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nFor example, I once copy-pasted code from Google AI and it injected an extra, unintended, space into my Terminal upstream of my intended path and removed my whole user folder, losing all of this website’s initial mock-ups and files. I was savvy enough to only be so cavalier on a Virtual Machine but not savvy enough to have fully set up a repository or copy!↩︎\nAs of June, 2026↩︎\nReduces model weights to fewer values. Tradeoff between accuracy and speed/memory usage↩︎"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Select Products",
+    "section": "",
+    "text": "Map of Principal Component Analysis (PCA)\nTidyTuesday data on Centers for Medicare & Medicaid Services (CMS) to derive regional insights on healthcare quality in the US\n\n\n\n\n\nShiny Dashboard for Washington State WAVES study\n*Note this dashboard runs on WebR & may take 5-10 seconds to load\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| code-fold: true\n#| viewerHeight: 600\n\n\n\n#load libraries\n\nlibrary(shiny)\nlibrary(bslib)\nlibrary(plotly)\nlibrary(ggplot2)\nlibrary(dplyr)\n\n\n# 1. LOAD DATA (The Print Test is built in here)\n# all_cohorts &lt;- readRDS(\"assets/all_cohortsRDS.rds\")\n\nall_cohorts &lt;- structure(list(variable = c(\"All\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", \"Race - Dichotomized\", \"Race - Dichotomized\", \"Latina/o/x ethnicity\", \"Latina/o/x ethnicity\", \"Sex\", \"Sex\", ind_any_pos2 = \"Self-reported Positive\", ind_any_pos2 = \"Self-reported Positive\", ind_any_pos2 = \"Self-reported Positive\", ind_any_pos2 = \"Self-reported Positive\", ind_any_pos2 = \"Self-reported Positive\", ind_any_pos2 = \"Self-reported Positive\", \"All\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", \"Race - Dichotomized\", \"Race - Dichotomized\", \"Latina/o/x ethnicity\", \"Latina/o/x ethnicity\", \"Sex\", \"Sex\", ind_any_pos2_fup = \"Self-reported Positive\", ind_any_pos2_fup = \"Self-reported Positive\", ind_any_pos2_fup = \"Self-reported Positive\", ind_any_pos2_fup = \"Self-reported Positive\", ind_any_pos2_fup = \"Self-reported Positive\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", agecat = \"Age Category\", \"Race - Dichotomized\", \"Race - Dichotomized\", \"Latina/o/x ethnicity\", \"Latina/o/x ethnicity\", \"Sex\", \"Sex\", ind_any_pos2 = \"Self-reported Positive\", ind_any_pos2 = \"Self-reported Positive\", ind_any_pos2 = \"Self-reported Positive\", ind_any_pos2 = \"Self-reported Positive\", ind_any_pos2 = \"Self-reported Positive\", ind_any_pos2 = \"Self-reported Positive\", \"All\"), value = c(\"all\", \"10-17\", \"18-24\", \"25-34\", \"35-44\", \"45-54\", \"55-64\", \"65-85\", \"Non-White/Caucasian or Multi-racial\", \"White/Caucasian Only\", \"Yes\", \"No\", \"Male\", \"Female\", \"Previous Positive\", \"Most recent Negative, no prior Positive\", \"Most recent Negative\", \"Previously tested, unknown results\", \"No previous test\", \"Unknown\", \"all\", \"10-17\", \"18-24\", \"25-34\", \"35-44\", \"45-54\", \"55-64\", \"65-85\", \"Non-White/Caucasian or Multi-racial\", \"White/Caucasian Only\", \"Yes\", \"No\", \"Male\", \"Female\", \"Previous Positive\", \"Most recent Negative\", \"Previously tested, unknown results\", \"No tests outside survey\", \"Unknown\", \"10-17\", \"18-24\", \"25-34\", \"35-44\", \"45-54\", \"55-64\", \"65-85\", \"Non-White/Caucasian or Multi-racial\", \"White/Caucasian Only\", \"Yes\", \"No\", \"Male\", \"Female\", \"Previous Positive\", \"Most recent Negative, no prior Positive\", \"Most recent Negative\", \"Previously tested, unknown results\", \"No previous test\", \"Unknown\", \"all\"), Reactive = c(374, 38, 60, 58, 76, 63, 49, 30, 125, 249, 57, 317, 164, 210, 163, 139, 11, 2, 50, 3, 240, 18, 17, 31, 64, 36, 38, 36, 40, 200, 36, 204, 104, 136, 137, 94, 7, 2, 0, 40, 63, 61, 78, 69, 53, 41, 126, 279, 59, 346, 179, 226, 175, 139, 11, 11, 57, 6, 405), antiN_Reactive = c(15.6, 26.8, 25.2, 11, 13.6, 17.9, 15.3, 11.7, 16.5, 15.2, 20.8, 15, 16.9, 14.8, 78.7, 8.8, 12, 28.6, 10.6, 17.6, 26.6, 41.9, 35.4, 24, 35, 25, 23.9, 18.3, 23, 27.4, 42.9, 24.9, 28.4, 25.3, 86.7, 13.2, 30.4, 50, 0, 6.6, 2.8, 10, 0.3, 7.9, 2.8, 3.3, 1.3, 6.2, 3.9, 4.8, 5.1, 4.3, 81.2, 0, 0, 2.9, 3.8, 1.4, 4.7), sample_total = c(2393, 142, 238, 526, 557, 352, 321, 257, 758, 1635, 274, 2119, 971, 1421, 207, 1573, 92, 7, 472, 17, 903, 43, 48, 129, 183, 144, 159, 197, 174, 729, 84, 819, 366, 537, 158, 714, 23, 4, 4, 169, 265, 571, 647, 437, 430, 478, 843, 2153, 311, 2686, 1239, 1757, 224, 1577, 110, 305, 705, 51, 2997), cohort = structure(c(2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L), .Label = c(\"WV1 Random\", \"WV1 Open Enroll\", \"WV2 All\"), class = \"factor\"), LL_Reactive = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 0, 0, 0, 0, 0, 0, 0, 0, 2.1, 0, 1.5, 0.8, 0.8, 63.1, 0, 0, 0, 0, 0, 1.6), UL_Reactive = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 17.5, 7.1, 23.2, 0.8, 18.1, 7, 6.8, 3.9, 10.3, 11.7, 8.1, 9.3, 7.8, 99.3, 0, 0, 6.5, 8.2, 4.1, 7.7), antiN_Nonreactive = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 93.4, 97.2, 90, 99.7, 92.1, 97.2, 96.7, 98.7, 93.8, 96.1, 95.2, 94.9, 95.7, 18.8, 100, 100, 97.1, 96.2, 98.6, 95.3), LL_Nonreactive = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 82.5, 92.9, 76.8, 99.2, 81.9, 93, 93.2, 96.1, 89.7, 88.3, 91.9, 90.7, 92.2, 0.7, 100, 100, 93.5, 91.8, 95.9, 92.3), UL_Nonreactive = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 100, 100, 100, 100, 100, 100, 100, 100, 97.9, 100, 98.5, 99.2, 99.2, 36.9, 100, 100, 100, 100, 100, 98.4)), row.names = c(NA, -59L), class = c(\"tbl_df\", \"tbl\", \"data.frame\"))\n\n\n\n# Ensure factors are correct\nall_cohorts$cohort &lt;- factor(all_cohorts$cohort, \n                             levels = c(\"WV1 Random\", \"WV1 Open Enroll\", \"WV2 All\"))\n\npos_lvls &lt;- c('Previous Positive', 'Most recent Negative', 'Most recent Negative, no prior Positive', \n               'Previously tested, unknown results', 'No previous test', \"No tests outside survey\", 'Unknown')\n\n# 2. UI\nui &lt;- fluidPage(\n  theme = bs_theme(version = \"5\", bootswatch = \"flatly\"),\n  titlePanel(\"COVID-19 Estimated Prevalence by Cohort\"),\n  \n  # Filter box sits on top spanning full horizontal width\n  wellPanel(\n    selectInput(\"variable\", \"Select Variable:\", choices = unique(all_cohorts$variable), width = \"100%\")\n  ),\n\n  # Plot area\n      plotlyOutput(\"plot\")\n    \n  )\n\n\n# 3. SERVER\nserver &lt;- function(input, output) {\n  \n  # Reactive data processing\n  plot_data &lt;- reactive({\n    df &lt;- all_cohorts %&gt;% filter(variable == input$variable)\n    if (input$variable == \"Self-reported Positive\") {\n      df &lt;- df %&gt;% mutate(value = factor(value, levels = pos_lvls))\n    }\n    df\n  })\n\n  output$plot &lt;- renderPlotly({\n    req(plot_data())\n    \n    # Standard ggplot construction\n    p &lt;- ggplot(plot_data(), aes(x = cohort, y = antiN_Reactive, fill = value)) +\n      geom_col(position = position_dodge(0.9), color = 'black', width = 0.8) +\n      geom_errorbar(aes(ymin = LL_Reactive, ymax = UL_Reactive, group = value), \n                     width = 0.2, position = position_dodge(0.9)) +\n      scale_fill_manual(values = c(\"#008995\", \"#D24310\", \"#32006E\", \"#FFC700\", \"#2C6ACE\", \"#925088\", \"#566069\")) +\n      labs(x = NULL, y = 'Percentage', fill = input$variable) +\n      theme_minimal() + \n       theme(\n        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)\n      )\n    \n    ggplotly(p)\n  })\n}\n\n# 4. RUN\nshinyApp(ui = ui, server = server)\n\n\n\n\nBumpchart GIF: TidyTuesday Perfume Project"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Trying a Local LLM",
+    "section": "",
+    "text": "Maybe it’s the old ad campaign, ‘what happens in Vegas, stays in Vegas’, but more and more I want to use a model without becoming part of the next training dataset. Beyond this concern for privacy, I believe the AI ‘arms race’ will eventually slow down. And once there are few competitors left, both individuals and organizations will be asked to pay the true compute cost. Small- and medium-sized firms may look to hybrid strategies: using both local and cloud services for storage, operations, and LLMs (large-language models). Thus, I’m exploring my first local LLM.\n\n\n\n\n\nI am not a computer scientist… just comfortable enough to be dangerous in the Terminal1. I have a newer Mac laptop and 32GB of RAM.\n\n\n\n\n\nFor a basic out-of-the-box chat, I downloaded ollama. Ultimately, I chose gemma4:12b-mlx. It seemed to be a newer model2 which my system could handle AND can be used with visual and audio inputs, not just text.\n\n\n\n\nDownloads and runs\n\n\n\n\nollama pull 'modelname/version'\n\n\n\n\nRuns only\n\n\n\n\nollama run 'modelname/version'\n\n\n\n\nFor those who aren’t familiar, ollama helps handle:\n\n\n\n\n\ndependencies - other software that your software DEPENDS on to run\nmodel downloads - different models have different parameterization options, some can be run via cloud, some locally, etc.\nserver processes - making it all work through calculations and managing computer hardware usage\n\n\n\n\n\n\nThe first lesson I learned was to not trust AI to choose your LLM model - or at least put more thought into it. I first downloaded gemma4-12b:q8_0. I wanted power, I wanted precision, I wanted to vibe code well… AND based only on available RAM and disk space it theoretically could’ve worked. But it was SLOW 🐢. Each letter of thinking and response was meticulously ‘typed out’ on the terminal screen. So I removed that model and downloaded the MLX version designed to work with Mac’s unified memory. I don’t know if it was this better memory management or the default 4-bit quantization3 but the model’s file size was halved and speed of response was bearable! 🐯\n\n\n\n\n\nOn text, Gemma4 comes with a ‘thinking’ default. An internal monologue inside of a ‘thought channel’ helps to identify tools or revise initial predictions before executing those tools or formulating a response. It’s designed to improved response accuracy over standard next-token prediction; however, it does slow down the process due to both the additional processing tasks and the extra terminal output.\n\n\n\n\nOn CLI (command line interface) setting –think=false will suppress this for the entire session.\n\n\n\n\nollama run 'modelname/version' --think=false\n\n\n\n\nor to toggle off within the session, \\set nothink.\n\n\n\n\n\nStop the process in Terminal if it’s ‘thinking’ or responding too much or hanging by using Ctrl + C. Once you’re done chatting and if the model is still running, to exit out of the model/ollama, tell it /bye.\n\n\n\n\n\nThis specific model on my hardware is heavily impacted by the ‘think’ setting. Total duration is noticeably 4x faster with –think=false. For example, ~10 seconds vs. ~40 seconds for the prompt, ‘how big is the oldest Douglas Fir tree?’. I used option --verbose on ollama CLI to compare rates and time. Do note that repeat previous prompting can drastically affect prompt evaluation metrics; a repeat prompt with –think=false avoids recalculation of (attention) weights by pulling these values from the cache. Interestingly, trying to test cache use with toggling `/set think’ within the same chat session caused Gemma4’s ‘thought channel’ to add the context that I had asked the same question three times and actually increased tokens used and duration metrics!\n\n\n\n\nOverall, Gemma4:12b-mlx is user-friendly as a local LLM. However, a reminder that LLMs are ‘frozen in time’ to their training unless using RAG (Retrieval-Augmented Generation) or fine-tuning them. Gemma4’s training ends January 2025. Not pulling from the internet is a pro for privacy and security but a con for up-to-date information.\n\n\n\n\n\nMy next step is to use CLI or Open WebUI to explore the model’s functionality for visual information. I will also continue to explore its coding performance on debugging issues or writing short code for small personal tasks."
+  },
+  {
+    "objectID": "blog.html#motivation",
+    "href": "blog.html#motivation",
+    "title": "Trying a Local LLM",
+    "section": "",
+    "text": "Maybe it’s the old ad campaign, ‘what happens in Vegas, stays in Vegas’, but more and more I want to use a model without becoming part of the next training dataset. Beyond this concern for privacy, I believe the AI ‘arms race’ will eventually slow down. And once there are few competitors left, both individuals and organizations will be asked to pay the true compute cost. Small- and medium-sized firms may look to hybrid strategies: using both local and cloud services for storage, operations, and LLMs (large-language models). Thus, I’m exploring my first local LLM."
+  },
+  {
+    "objectID": "blog.html#resources",
+    "href": "blog.html#resources",
+    "title": "Trying a Local LLM",
+    "section": "",
+    "text": "I am not a computer scientist… just comfortable enough to be dangerous in the Terminal1. I have a newer Mac laptop and 32GB of RAM."
+  },
+  {
+    "objectID": "blog.html#setup",
+    "href": "blog.html#setup",
+    "title": "Trying a Local LLM",
+    "section": "",
+    "text": "For a basic out-of-the-box chat, I downloaded ollama. Ultimately, I chose gemma4:12b-mlx. It seemed to be a newer model2 which my system could handle AND can be used with visual and audio inputs, not just text."
+  },
+  {
+    "objectID": "blog.html#immediate-impressions",
+    "href": "blog.html#immediate-impressions",
+    "title": "Trying a Local LLM",
+    "section": "",
+    "text": "This specific model on my hardware is heavily impacted by the ‘think’ setting. Total duration is noticeably 4x faster with –think=false. For example, ~10 seconds vs. ~40 seconds for the prompt, ‘how big is the oldest Douglas Fir tree?’. I used option --verbose on ollama CLI to compare rates and time. Do note that repeat previous prompting can drastically affect prompt evaluation metrics; a repeat prompt with –think=false avoids recalculation of (attention) weights by pulling these values from the cache. Interestingly, trying to test cache use with toggling `/set think’ within the same chat session caused Gemma4’s ‘thought channel’ to add the context that I had asked the same question three times and actually increased tokens used and duration metrics!"
+  },
+  {
+    "objectID": "blog.html#future-exploration",
+    "href": "blog.html#future-exploration",
+    "title": "Trying a Local LLM",
+    "section": "",
+    "text": "My next step is to use CLI or Open WebUI to explore the model’s functionality for visual information. I will also continue to explore its coding performance on debugging issues or writing short code for small personal tasks."
+  }
+]
